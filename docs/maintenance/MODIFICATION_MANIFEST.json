@@ -1,0 +1,427 @@
+{
+  "version": "1.0.0",
+  "manifest_format_version": "1.0",
+  "fork_info": {
+    "repository": "https://github.com/DataSparBrian/ComfyUI-Copilot-Unboxed",
+    "tagline": "The unboxed version - bring your own AI",
+    "purpose": "Privacy-focused fork removing vendor lock-in while preserving core functionality",
+    "philosophy": "Respectfully removing vendor lock-in while preserving excellent core functionality developed by AIDC-AI",
+    "maintained_by": "DataSparBrian",
+    "created_date": "2025-11-30"
+  },
+  "upstream_info": {
+    "repository": "https://github.com/AIDC-AI/ComfyUI-Copilot",
+    "branch": "main",
+    "last_synced_commit": "TBD",
+    "last_sync_date": "TBD",
+    "original_authors": "Alibaba International Digital Commerce (AIDC-AI)",
+    "license": "MIT"
+  },
+  "modification_summary": {
+    "total_files_modified": 0,
+    "total_files_removed": 0,
+    "total_files_added": 0,
+    "categories": {
+      "privacy": 0,
+      "telemetry_removal": 0,
+      "vendor_registration_removal": 0,
+      "ui_cleanup": 0,
+      "documentation": 0,
+      "fork_infrastructure": 0
+    }
+  },
+  "modifications": [
+    {
+      "file": "backend/utils/track_utils.py",
+      "action": "pending_removal",
+      "reason": "telemetry_placeholder",
+      "description": "Empty file that appears to be a placeholder for telemetry/tracking code",
+      "category": "telemetry_removal",
+      "priority": "high",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "block",
+      "tags": ["privacy", "telemetry", "remove"]
+    },
+    {
+      "file": "ui/src/components/chat/ApiKeyModal.tsx",
+      "action": "pending_modification",
+      "reason": "remove_email_collection",
+      "category": "vendor_registration_removal",
+      "priority": "critical",
+      "changes": [
+        {
+          "type": "removal",
+          "lines": "246-270",
+          "description": "Remove handleSendEmail function that POSTs to /api/user/create",
+          "justification": "Vendor registration not needed for BYOK usage"
+        },
+        {
+          "type": "removal",
+          "lines": "336-362",
+          "description": "Remove email input field and Send button UI",
+          "justification": "No email collection needed for privacy-focused fork"
+        },
+        {
+          "type": "removal",
+          "lines": "363-381",
+          "description": "Remove privacy policy and terms of use links to Alibaba CDN",
+          "justification": "Vendor-specific terms not applicable to fork"
+        },
+        {
+          "type": "modification",
+          "lines": "7-11",
+          "description": "Update component description and purpose in comments",
+          "justification": "Reflect BYOK-focused purpose"
+        }
+      ],
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "manual_review_required",
+      "notes": "This file already has good BYOK support (OpenAI/LMStudio tabs). Only need to remove vendor registration elements.",
+      "tags": ["privacy", "ui", "critical", "email_collection"]
+    },
+    {
+      "file": "ui/src/config.ts",
+      "action": "pending_modification",
+      "reason": "update_fork_urls",
+      "category": "documentation",
+      "priority": "medium",
+      "changes": [
+        {
+          "type": "modification",
+          "lines": "8",
+          "description": "Change github_url from AIDC-AI/ComfyUI-Copilot to DataSparBrian/ComfyUI-Copilot-Unboxed",
+          "justification": "Point to fork repository for issue reporting"
+        }
+      ],
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "keep_local",
+      "tags": ["config", "urls"]
+    },
+    {
+      "file": "public/showcase/showcase.json",
+      "action": "pending_modification",
+      "reason": "remove_vendor_content",
+      "category": "ui_cleanup",
+      "priority": "medium",
+      "changes": [
+        {
+          "type": "replacement",
+          "description": "Replace Alibaba OSS image URLs with local examples or generic placeholders",
+          "justification": "Remove dependency on vendor CDN"
+        },
+        {
+          "type": "removal",
+          "description": "Remove any promotional or vendor-specific showcase examples",
+          "justification": "Keep only functional examples"
+        }
+      ],
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "manual_review_required",
+      "tags": ["assets", "vendor_content"]
+    },
+    {
+      "file": "public/showcase/showcase_en.json",
+      "action": "pending_modification",
+      "reason": "remove_vendor_content",
+      "category": "ui_cleanup",
+      "priority": "medium",
+      "changes": [
+        {
+          "type": "replacement",
+          "description": "Replace Alibaba OSS image URLs with local examples or generic placeholders",
+          "justification": "Remove dependency on vendor CDN"
+        },
+        {
+          "type": "removal",
+          "description": "Remove any promotional or vendor-specific showcase examples",
+          "justification": "Keep only functional examples"
+        }
+      ],
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "manual_review_required",
+      "tags": ["assets", "vendor_content"]
+    },
+    {
+      "file": "README.md",
+      "action": "pending_replacement",
+      "reason": "fork_documentation",
+      "category": "documentation",
+      "priority": "critical",
+      "changes": [
+        {
+          "type": "addition",
+          "description": "Add comprehensive 'About This Fork' section with prominent attribution to original AIDC-AI developers",
+          "justification": "Clearly explain fork purpose while crediting original work"
+        },
+        {
+          "type": "modification",
+          "description": "Update installation instructions to use DataSparBrian/ComfyUI-Copilot-Unboxed repository",
+          "justification": "Users should clone the fork, not upstream"
+        },
+        {
+          "type": "addition",
+          "description": "Add 'What Unboxed Means' section explaining vendor-neutral approach",
+          "justification": "Clarify that this is not an offline-only fork"
+        },
+        {
+          "type": "modification",
+          "description": "Replace vendor contact email with GitHub Issues link",
+          "justification": "Community support via GitHub"
+        },
+        {
+          "type": "removal",
+          "description": "Remove vendor-specific promotional badges, QR codes, and social media links",
+          "justification": "Not applicable to community fork"
+        },
+        {
+          "type": "addition",
+          "description": "Add Configuration section for various providers (OpenRouter, Ollama, OpenAI, etc.)",
+          "justification": "Help users with BYOK setup"
+        }
+      ],
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "keep_local",
+      "notes": "README is entirely fork-specific. Never merge from upstream. Monitor upstream README for new feature docs to adapt.",
+      "tags": ["documentation", "critical", "attribution"]
+    },
+    {
+      "file": "README_CN.md",
+      "action": "pending_replacement",
+      "reason": "fork_documentation_chinese",
+      "category": "documentation",
+      "priority": "low",
+      "changes": [
+        {
+          "type": "similar_to",
+          "reference": "README.md",
+          "description": "Apply same changes as English README but in Chinese",
+          "justification": "Maintain Chinese language support"
+        }
+      ],
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "keep_local",
+      "notes": "Lower priority as English README is primary. May need translation assistance.",
+      "tags": ["documentation", "i18n"]
+    },
+    {
+      "file": "docs/maintenance/ARCHITECTURE_MAP.md",
+      "action": "added",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "critical",
+      "description": "Comprehensive documentation of codebase structure and file classifications for maintainability",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["documentation", "fork_specific", "maintenance"]
+    },
+    {
+      "file": "docs/maintenance/MODIFICATION_MANIFEST.json",
+      "action": "added",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "critical",
+      "description": "This file - machine-readable tracking of all fork modifications",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["documentation", "fork_specific", "maintenance"]
+    },
+    {
+      "file": "docs/maintenance/UPSTREAM_SYNC_STRATEGY.md",
+      "action": "pending_addition",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "critical",
+      "description": "Documentation of upstream synchronization process and best practices",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["documentation", "fork_specific", "maintenance"]
+    },
+    {
+      "file": "tools/upstream_monitor.py",
+      "action": "pending_addition",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "high",
+      "description": "Automated script to monitor upstream repository for changes and categorize them",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["automation", "fork_specific", "maintenance"]
+    },
+    {
+      "file": "tools/privacy_validator.py",
+      "action": "pending_addition",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "high",
+      "description": "Automated privacy audit script to scan for telemetry, analytics, and vendor lock-in patterns",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["automation", "fork_specific", "privacy", "maintenance"]
+    },
+    {
+      "file": "tools/apply_upstream_changes.py",
+      "action": "pending_addition",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "high",
+      "description": "Semi-automated tool to intelligently merge upstream changes while preserving fork modifications",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["automation", "fork_specific", "maintenance"]
+    },
+    {
+      "file": ".github/workflows/upstream-sync.yml",
+      "action": "pending_addition",
+      "reason": "fork_infrastructure",
+      "category": "fork_infrastructure",
+      "priority": "medium",
+      "description": "CI/CD workflow to automatically check for upstream changes weekly",
+      "original_hash": null,
+      "modified_hash": null,
+      "upstream_merge_strategy": "not_applicable",
+      "tags": ["ci_cd", "fork_specific", "automation"]
+    }
+  ],
+  "privacy_audit": {
+    "last_audit_date": "2025-11-30",
+    "vendor_endpoints_found": [
+      {
+        "endpoint": "/api/user/create",
+        "file": "ui/src/components/chat/ApiKeyModal.tsx",
+        "line": 251,
+        "purpose": "Email collection for vendor API key generation",
+        "status": "pending_removal"
+      }
+    ],
+    "vendor_cdn_urls_found": [
+      {
+        "url": "https://cdn.contract.alibaba.com/terms/privacy_policy_full/...",
+        "file": "ui/src/components/chat/ApiKeyModal.tsx",
+        "line": 366,
+        "purpose": "Privacy policy link",
+        "status": "pending_removal"
+      },
+      {
+        "url": "https://cdn.contract.alibaba.com/terms/c_end_product_protocol/...",
+        "file": "ui/src/components/chat/ApiKeyModal.tsx",
+        "line": 374,
+        "purpose": "Terms of use link",
+        "status": "pending_removal"
+      },
+      {
+        "url": "https://aib-vision-hz.oss-accelerate.aliyuncs.com/...",
+        "file": "public/showcase/showcase.json",
+        "multiple_occurrences": true,
+        "purpose": "Showcase example images",
+        "status": "pending_replacement"
+      }
+    ],
+    "telemetry_patterns_found": [
+      {
+        "file": "backend/utils/track_utils.py",
+        "pattern": "Empty file - telemetry placeholder",
+        "status": "pending_removal"
+      }
+    ],
+    "external_services_user_controlled": [
+      {
+        "service": "OpenAI API",
+        "status": "acceptable",
+        "reason": "User provides own API key"
+      },
+      {
+        "service": "LMStudio (local)",
+        "status": "acceptable",
+        "reason": "User runs locally"
+      },
+      {
+        "service": "CivitAI",
+        "status": "acceptable",
+        "reason": "User choice for model browsing"
+      },
+      {
+        "service": "ModelScope",
+        "status": "acceptable",
+        "reason": "User choice for model downloads"
+      }
+    ]
+  },
+  "merge_rules": {
+    "auto_merge_patterns": [
+      "backend/service/**/*.py",
+      "ui/src/components/ui/**/*",
+      "ui/src/components/debug/**/*"
+    ],
+    "manual_review_required": [
+      "ui/src/components/chat/**/*",
+      "ui/src/apis/**/*",
+      "backend/controller/**/*",
+      "ui/src/config.ts",
+      "public/**/*"
+    ],
+    "always_block": [
+      "backend/utils/track_utils.py"
+    ],
+    "always_keep_local": [
+      "README.md",
+      "README_CN.md",
+      "docs/maintenance/**/*",
+      "tools/**/*",
+      ".github/workflows/upstream-sync.yml"
+    ]
+  },
+  "testing_checklist": {
+    "privacy_validation": [
+      "No network calls to vendor telemetry endpoints",
+      "No email collection or forced registration",
+      "No popup ads or QR codes",
+      "No vendor-specific terms of service links"
+    ],
+    "functionality_validation": [
+      "Workflow generation works with user-specified LLM",
+      "Debug functionality works",
+      "Workflow rewriting works",
+      "Parameter tuning works",
+      "Node recommendations work",
+      "Model downloads work (user choice)"
+    ],
+    "byok_validation": [
+      "OpenAI API key configuration works",
+      "LMStudio local connection works",
+      "OpenRouter configuration works",
+      "Anthropic Claude configuration works",
+      "Custom endpoint configuration works"
+    ]
+  },
+  "maintenance_notes": {
+    "sync_frequency": "Weekly upstream check recommended",
+    "priority_order": [
+      "Critical bug fixes from upstream",
+      "Security updates",
+      "New core features",
+      "Performance improvements",
+      "UI enhancements (non-promotional)",
+      "Documentation improvements"
+    ],
+    "communication_guidelines": [
+      "Always credit upstream work in commit messages",
+      "Use neutral, respectful tone",
+      "Focus on 'vendor-neutral' not 'anti-vendor'",
+      "Acknowledge excellent upstream development work",
+      "Frame as 'unboxing' not 'fixing'"
+    ]
+  }
+}
