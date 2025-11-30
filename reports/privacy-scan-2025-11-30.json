@@ -1,7 +1,23 @@
 {
-  "timestamp": "2025-11-30T21:19:58.796549",
-  "total_violations": 39,
+  "timestamp": "2025-11-30T22:08:41.108753",
+  "total_violations": 38,
   "violations": [
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/tools/upstream_monitor.py",
+      "line": 243,
+      "severity": "warning",
+      "type": "email_collection",
+      "message": "Email collection pattern detected",
+      "code": "\"email_collection\": r\"(email.*validation|collect.*email|user.*create|registration)\","
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/tools/upstream_monitor.py",
+      "line": 243,
+      "severity": "warning",
+      "type": "email_collection",
+      "message": "Email collection pattern detected",
+      "code": "\"email_collection\": r\"(email.*validation|collect.*email|user.*create|registration)\","
+    },
     {
       "file": "/home/user/ComfyUI-Copilot-Unboxed/tools/privacy_validator.py",
       "line": 223,
@@ -99,54 +115,6 @@
       "code": "r\"/api/key/create\","
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/tools/upstream_monitor.py",
-      "line": 243,
-      "severity": "warning",
-      "type": "email_collection",
-      "message": "Email collection pattern detected",
-      "code": "\"email_collection\": r\"(email.*validation|collect.*email|user.*create|registration)\","
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/tools/upstream_monitor.py",
-      "line": 243,
-      "severity": "warning",
-      "type": "email_collection",
-      "message": "Email collection pattern detected",
-      "code": "\"email_collection\": r\"(email.*validation|collect.*email|user.*create|registration)\","
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
-      "line": 56,
-      "severity": "warning",
-      "type": "email_collection",
-      "message": "Email collection pattern detected",
-      "code": "\"description\": \"Remove handleSendEmail function that POSTs to /api/user/create\","
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
-      "line": 302,
-      "severity": "warning",
-      "type": "email_collection",
-      "message": "Email collection pattern detected",
-      "code": "\"endpoint\": \"/api/user/create\","
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
-      "line": 311,
-      "severity": "error",
-      "type": "vendor_cdn",
-      "message": "Vendor CDN URL detected: alibaba",
-      "code": "\"url\": \"https://cdn.contract.alibaba.com/terms/privacy_policy_full/...\","
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
-      "line": 318,
-      "severity": "error",
-      "type": "vendor_cdn",
-      "message": "Vendor CDN URL detected: alibaba",
-      "code": "\"url\": \"https://cdn.contract.alibaba.com/terms/c_end_product_protocol/...\","
-    },
-    {
       "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/apis/workflowChatApi.ts",
       "line": 69,
       "severity": "critical",
@@ -156,11 +124,67 @@
     },
     {
       "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/apis/workflowChatApi.ts",
-      "line": 154,
+      "line": 77,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "// console.debug('trackEvent (disabled):', request.event_type);"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/apis/workflowChatApi.ts",
+      "line": 136,
       "severity": "critical",
       "type": "analytics_call",
       "message": "Analytics function call detected",
       "code": "trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/ui/RestoreCheckpoint.tsx",
+      "line": 24,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "WorkflowChatAPI.trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/ui/Markdown.tsx",
+      "line": 153,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "WorkflowChatAPI.trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/aiTextUtils.ts",
+      "line": 32,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "WorkflowChatAPI.trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/aiTextUtils.ts",
+      "line": 103,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "WorkflowChatAPI.trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/imageGenerationUtils.ts",
+      "line": 58,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "WorkflowChatAPI.trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/stateManagementUtils.ts",
+      "line": 152,
+      "severity": "critical",
+      "type": "analytics_call",
+      "message": "Analytics function call detected",
+      "code": "WorkflowChatAPI.trackEvent({"
     },
     {
       "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/ModelDownloadModal.tsx",
@@ -169,6 +193,14 @@
       "type": "analytics_call",
       "message": "Analytics function call detected",
       "code": "WorkflowChatAPI.trackEvent({"
+    },
+    {
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/ApiKeyModal.tsx",
+      "line": 224,
+      "severity": "critical",
+      "type": "email_collection",
+      "message": "Email collection pattern detected",
+      "code": "// Privacy-focused fork: Email validation removed"
     },
     {
       "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/ChatInput.tsx",
@@ -187,32 +219,8 @@
       "code": "WorkflowChatAPI.trackEvent({"
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/ApiKeyModal.tsx",
-      "line": 251,
-      "severity": "critical",
-      "type": "email_collection",
-      "message": "Email collection pattern detected",
-      "code": "const response = await fetch(`${BASE_URL}/api/user/create`, {"
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/ApiKeyModal.tsx",
-      "line": 366,
-      "severity": "error",
-      "type": "vendor_cdn",
-      "message": "Vendor CDN URL detected: alibaba",
-      "code": "href=\"https://cdn.contract.alibaba.com/terms/privacy_policy_full/20250219145958852/20250219145958852"
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/ApiKeyModal.tsx",
-      "line": 374,
-      "severity": "error",
-      "type": "vendor_cdn",
-      "message": "Vendor CDN URL detected: alibaba",
-      "code": "href=\"https://cdn.contract.alibaba.com/terms/c_end_product_protocol/20250219150239949/20250219150239"
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/messages/ModelOption.tsx",
-      "line": 86,
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/messages/DebugGuide.tsx",
+      "line": 75,
       "severity": "critical",
       "type": "analytics_call",
       "message": "Analytics function call detected",
@@ -251,14 +259,6 @@
       "code": "WorkflowChatAPI.trackEvent({"
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/messages/DebugGuide.tsx",
-      "line": 75,
-      "severity": "critical",
-      "type": "analytics_call",
-      "message": "Analytics function call detected",
-      "code": "WorkflowChatAPI.trackEvent({"
-    },
-    {
       "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/messages/WorkflowOption.tsx",
       "line": 57,
       "severity": "critical",
@@ -267,52 +267,44 @@
       "code": "WorkflowChatAPI.trackEvent({"
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/imageGenerationUtils.ts",
-      "line": 58,
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/chat/messages/ModelOption.tsx",
+      "line": 86,
       "severity": "critical",
       "type": "analytics_call",
       "message": "Analytics function call detected",
       "code": "WorkflowChatAPI.trackEvent({"
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/stateManagementUtils.ts",
-      "line": 152,
-      "severity": "critical",
-      "type": "analytics_call",
-      "message": "Analytics function call detected",
-      "code": "WorkflowChatAPI.trackEvent({"
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
+      "line": 56,
+      "severity": "warning",
+      "type": "email_collection",
+      "message": "Email collection pattern detected",
+      "code": "\"description\": \"Remove handleSendEmail function that POSTs to /api/user/create\","
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/aiTextUtils.ts",
-      "line": 32,
-      "severity": "critical",
-      "type": "analytics_call",
-      "message": "Analytics function call detected",
-      "code": "WorkflowChatAPI.trackEvent({"
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
+      "line": 302,
+      "severity": "warning",
+      "type": "email_collection",
+      "message": "Email collection pattern detected",
+      "code": "\"endpoint\": \"/api/user/create\","
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/debug/utils/aiTextUtils.ts",
-      "line": 103,
-      "severity": "critical",
-      "type": "analytics_call",
-      "message": "Analytics function call detected",
-      "code": "WorkflowChatAPI.trackEvent({"
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
+      "line": 311,
+      "severity": "error",
+      "type": "vendor_cdn",
+      "message": "Vendor CDN URL detected: alibaba",
+      "code": "\"url\": \"https://cdn.contract.alibaba.com/terms/privacy_policy_full/...\","
     },
     {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/ui/Markdown.tsx",
-      "line": 153,
-      "severity": "critical",
-      "type": "analytics_call",
-      "message": "Analytics function call detected",
-      "code": "WorkflowChatAPI.trackEvent({"
-    },
-    {
-      "file": "/home/user/ComfyUI-Copilot-Unboxed/ui/src/components/ui/RestoreCheckpoint.tsx",
-      "line": 24,
-      "severity": "critical",
-      "type": "analytics_call",
-      "message": "Analytics function call detected",
-      "code": "WorkflowChatAPI.trackEvent({"
+      "file": "/home/user/ComfyUI-Copilot-Unboxed/docs/maintenance/MODIFICATION_MANIFEST.json",
+      "line": 318,
+      "severity": "error",
+      "type": "vendor_cdn",
+      "message": "Vendor CDN URL detected: alibaba",
+      "code": "\"url\": \"https://cdn.contract.alibaba.com/terms/c_end_product_protocol/...\","
     }
   ]
 }

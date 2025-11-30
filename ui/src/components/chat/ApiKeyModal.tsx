@@ -1,27 +1,25 @@
 /*
- * @Author: 晴知 qingli.hql@alibaba-inc.com
- * @Date: 2024-12-12 21:28:03
- * @LastEditors: ai-business-hql ai.bussiness.hql@gmail.com
- * @LastEditTime: 2025-10-16 11:49:08
- * @FilePath: /comfyui_copilot/ui/src/components/chat/ApiKeyModal.tsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBK                            <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                <div className="mb-1"><strong>🔗 For LMStudio:</strong> http://localhost:1234/v1 (leave API key empty)</div>
-                                <div className="mb-1"><strong>🌐 For OpenAI:</strong> https://api.openai.com/v1 (requires API key)</div>
-                                <div><strong>⚙️ For Custom:</strong> Any OpenAI-compatible server URL</div>
-                            </div>koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * ComfyUI-Copilot-Unboxed - API Key Configuration Modal
+ *
+ * Privacy-focused fork of AIDC-AI/ComfyUI-Copilot
+ * Original work by: Alibaba International Digital Commerce
+ * Fork: https://github.com/DataSparBrian/ComfyUI-Copilot-Unboxed
+ *
+ * Modifications in this fork:
+ * - Removed vendor email collection and registration
+ * - BYOK (Bring Your Own Key) focused - no vendor API required
+ * - Supports OpenAI, LMStudio, OpenRouter, Anthropic, and custom endpoints
  */
-// Copyright (C) 2025 AIDC-AI
+// Copyright (C) 2025 AIDC-AI (original)
+// Copyright (C) 2025 DataSparBrian (fork modifications)
 // Licensed under the MIT License.
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchRsaPublicKey, verifyOpenAiApiKey } from '../../utils/crypto';
 import Input from '../ui/Input';
 import CollapsibleCard from '../ui/CollapsibleCard';
 import { config } from '../../config';
-import Modal from '../ui/Modal';
-import { debounce } from 'lodash';
-import useCountDown from '../../hooks/useCountDown';
-import LoadingIcon from '../ui/Loading-icon';
+// Privacy-focused fork: Removed unused imports (Modal, debounce, useCountDown, LoadingIcon)
 import useLanguage from '../../hooks/useLanguage';
 import StartLink from '../ui/StartLink';
 import TabButton from '../ui/TabButton';
@@ -43,12 +41,7 @@ const TAB_LIST = [
 
 export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onConfigurationUpdated }: ApiKeyModalProps) {
     const [apiKey, setApiKey] = useState(initialApiKey);
-    const [email, setEmail] = useState('');
-    const [isEmailValid, setIsEmailValid] = useState(false);
-    const [modalOepn, setModalOpen] = useState(false)
-    const [modalContent, setModalContent] = useState('');
-    const { countDown, start } = useCountDown(60);
-    const [loading, setLoading] = useState(false);
+    // Privacy-focused fork: Email-related state removed (no vendor registration)
     
     // OpenAI configuration
     const [openaiApiKey, setOpenaiApiKey] = useState('');
@@ -228,14 +221,7 @@ export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onCon
         }
     };
 
-    const checkEmailValid = useMemo(
-        () => debounce((value: string) => {
-            console.log('checkEmailValid', value);
-            const reg = /^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            setIsEmailValid(reg.test(value));
-        }, 500), 
-        []
-    );
+    // Privacy-focused fork: Email validation removed
 
     const handleTabChange = (tab: string) => {
         setActiveTab(tab);
@@ -243,31 +229,8 @@ export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onCon
         setOpenaiBaseUrl(tabStrMap?.[tab]?.openaiBaseUrl || '');
     }
 
-    const handleSendEmail = async () => {
-        if (!email || email === '' || !isEmailValid)
-            return;
-        setLoading(true);
-        const username = email?.split('@')?.[0] || '';
-        const response = await fetch(`${BASE_URL}/api/user/create`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username,
-                email
-            })
-        });
-        const data = await response.json();
-        setLoading(false);
-        setModalOpen(true)
-        start();
-        if (!!data?.data) {
-            setModalContent('Send email successfully, please check your email');
-        } else {
-            setModalContent(data?.message || 'Send email failed');
-        }
-    }
+    // Privacy-focused fork: Email collection removed
+    // Users bring their own API keys - no vendor registration required
 
     const handleSave = () => {
         // Save the main API key
@@ -333,53 +296,8 @@ export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onCon
             <div className="bg-white dark:bg-gray-800 rounded-xl p-8 w-[480px] max-h-[80vh] shadow-2xl overflow-y-auto">
                 <h2 className="text-xl text-gray-900 dark:text-white font-semibold mb-6">Set API Key</h2>
                 
-                <div className="mb-6">
-                    <div className='flex flex-row justify-between'>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Email
-                        </label>
-                        <div className="text-sm text-red-600 dark:text-red-300">
-                            <span>{(!!email && email !== ''&& !isEmailValid) ? 'Please enter a valid email' : ''}</span>
-                        </div>
-                    </div>
-                    <div className="relative mb-4 flex flex-row gap-2">
-                        <Input
-                            value={email}
-                            setValue={setEmail}
-                            setIsValueValid={checkEmailValid}
-                            placeholder="Enter your Email"
-                            className='flex-1'
-                        />
-                        <button
-                            onClick={handleSendEmail}
-                            disabled={loading || !isEmailValid || countDown > 0}
-                            className={`w-28 py-2.5 ${(!loading && isEmailValid && countDown === 0) ? 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white' : 
-                                'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'} 
-                            rounded-lg font-medium transition-colors flex justify-center items-center`}
-                        >
-                            {loading ? <LoadingIcon /> : (countDown > 0 ? `Resend in ${countDown}s` : 'Send')}
-                        </button>
-                    </div>
-                    <div className="text-xs text-gray-600">
-                        By clicking the "Send" button below and submitting your information to us, you agree to our&nbsp;
-                        <a        
-                            href="https://cdn.contract.alibaba.com/terms/privacy_policy_full/20250219145958852/20250219145958852.html?lng=en"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className='underline underline-offset-2'
-                        >
-                            Privacy Policy
-                        </a> and&nbsp; 
-                        <a
-                            href="https://cdn.contract.alibaba.com/terms/c_end_product_protocol/20250219150239949/20250219150239949.html?lng=en"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className='underline underline-offset-2'
-                        >
-                            Terms of Use
-                        </a>.
-                    </div>
-                </div>
+                {/* Privacy-focused fork: Email collection removed
+                    This fork uses BYOK (Bring Your Own Key) - no vendor registration required */}
                 {/* Main API Key */}
                 <div className="mb-6">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -701,9 +619,7 @@ export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onCon
                     </button>
                 </div>
             </div>
-            <Modal open={modalOepn} onClose={() => setModalOpen(false)}>
-                <p>{modalContent}</p>
-            </Modal>
+            {/* Privacy-focused fork: Email confirmation modal removed */}
         </div>
     );
 } 
