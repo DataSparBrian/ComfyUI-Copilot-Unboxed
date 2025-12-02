@@ -3,13 +3,33 @@
 // Licensed under the MIT License.
 
 // Privacy-focused fork: LLM endpoint configuration
-// Set VITE_API_BASE_URL environment variable to point to your LLM service
-// Example: VITE_API_BASE_URL=http://localhost:8001 npm run build
-const defaultApiBaseUrl = 'http://localhost:8000'
+// Users configure their LLM endpoint via the Settings UI (ApiKeyModal)
+// The endpoint is stored in localStorage as 'workflowLLMBaseUrl'
+// No hardcoded defaults - user must configure their own LLM service
+
+const getApiBaseUrl = (): string => {
+  // Read from user configuration in localStorage
+  const userConfiguredUrl = localStorage.getItem('workflowLLMBaseUrl');
+
+  if (userConfiguredUrl) {
+    return userConfiguredUrl;
+  }
+
+  // Fallback for development/testing only - can be overridden via env var
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  // No default - return empty string
+  // UI will prompt user to configure their LLM endpoint
+  return '';
+};
 
 // Privacy-focused fork: Updated to point to ComfyUI-Copilot-Unboxed repository
 export const github_url = 'https://github.com/DataSparBrian/ComfyUI-Copilot-Unboxed'
 
 export const config = {
-  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || defaultApiBaseUrl
+  get apiBaseUrl(): string {
+    return getApiBaseUrl();
+  }
 } 
