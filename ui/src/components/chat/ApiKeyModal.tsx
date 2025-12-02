@@ -463,9 +463,9 @@ export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onCon
                         )}
                     </div>
                 </CollapsibleCard>
-                {/* Workflow LLM Configuration (Optional) */}
-                <CollapsibleCard 
-                    title={<h3 className="text-sm text-gray-900 dark:text-white font-medium">Workflow LLM Configuration (Optional)</h3>}
+                {/* Workflow LLM Configuration (Required for BYOK) */}
+                <CollapsibleCard
+                    title={<h3 className="text-sm text-gray-900 dark:text-white font-medium">Workflow LLM Configuration (Required)</h3>}
                     className='mb-4'
                 >
                     <div>
@@ -526,7 +526,7 @@ export function ApiKeyModal({ isOpen, onClose, onSave, initialApiKey = '', onCon
                                 focus:outline-none"
                             />
                             <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                <div className="mb-1"><strong>Optional:</strong> If you don't set, the workflow will use the Claude4 model provided by us. If you need to use other models(note: only some very powerful closed-source models can support this, and they require at least 8192 context) for workflow Debug and modification, please set it.</div>
+                                <div className="mb-1"><strong>BYOK Fork - Required:</strong> Configure your own LLM endpoint here. This fork does not provide any vendor services. Point to your OpenAI-compatible LLM server (requires powerful model with 8192+ context for workflow optimization). Example: http://localhost:8001 for local LLM.</div>
                             </div>
                             <div className="flex items-center mt-2">
                                 <button

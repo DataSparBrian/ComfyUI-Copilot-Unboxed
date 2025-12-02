@@ -16,7 +16,9 @@ import { generateUUID } from '../utils/uuid';
 import { encryptWithRsaPublicKey } from '../utils/crypto';
 import { app } from '../utils/comfyapp';
 
-const BASE_URL = config.apiBaseUrl
+// Privacy-focused fork: Read getBaseUrl() dynamically from user configuration
+// Users can change their LLM endpoint via Settings UI without reloading
+const getBaseUrl = () => config.apiBaseUrl
 
 const getApiKey = () => {
     const apiKey = localStorage.getItem('chatApiKey');
@@ -94,8 +96,8 @@ export namespace WorkflowChatAPI {
           'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
           'Cache-Control': 'max-age=0',
           'Comfy-User': '',
-          'Origin': BASE_URL,
-          'Referer': `${BASE_URL}/`,
+          'Origin': getBaseUrl(),
+          'Referer': `${getBaseUrl()}/`,
           'Sec-Fetch-Dest': 'empty',
           'Sec-Fetch-Mode': 'cors',
           'Sec-Fetch-Site': 'same-origin',
@@ -271,7 +273,7 @@ export namespace WorkflowChatAPI {
 
       let chatUrl = `/api/chat/invoke`
       if(intent && intent !== '') {
-        chatUrl = `${BASE_URL}/api/chat/invoke`
+        chatUrl = `${getBaseUrl()}/api/chat/invoke`
       } else {
         headers['Openai-Api-Key'] = openaiApiKey;
       }
@@ -378,7 +380,7 @@ export namespace WorkflowChatAPI {
         headers['Workflow-LLM-Api-Key'] = workflowLLMApiKey;
       }
       
-      const response = await fetch(`${BASE_URL}/api/chat/get_optimized_workflow`, {
+      const response = await fetch(`${getBaseUrl()}/api/chat/get_optimized_workflow`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -435,7 +437,7 @@ export namespace WorkflowChatAPI {
       headers['Workflow-LLM-Api-Key'] = workflowLLMApiKey;
     }
     
-    const response = await fetch(`${BASE_URL}/api/chat/get_node_info_by_types`, {
+    const response = await fetch(`${getBaseUrl()}/api/chat/get_node_info_by_types`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ 
@@ -483,7 +485,7 @@ export namespace WorkflowChatAPI {
         'Accept-Language': browserLanguage,
       };
       
-      const response = await fetch(`${BASE_URL}/api/chat/announcement`, {
+      const response = await fetch(`${getBaseUrl()}/api/chat/announcement`, {
         method: 'GET',
         headers,
       });
@@ -523,7 +525,7 @@ export namespace WorkflowChatAPI {
           'Accept-Language': browserLanguage,
         };
         
-        const response = await fetch(`${BASE_URL}/api/param_debug/generate_sd_prompts`, {
+        const response = await fetch(`${getBaseUrl()}/api/param_debug/generate_sd_prompts`, {
           method: 'POST',
           headers,
           body: JSON.stringify({
